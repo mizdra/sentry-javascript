@@ -2,7 +2,11 @@ import { getSentrySpan } from './spanprocessor';
 
 export { SentrySpanProcessor } from './spanprocessor';
 export { SentryPropagator } from './propagator';
-export * from './utils/spanData';
+
+/* eslint-disable deprecation/deprecation */
+export { addOtelSpanData, getOtelSpanData, clearOtelSpanData } from './utils/spanData';
+export type { AdditionalOtelSpanData } from './utils/spanData';
+/* eslint-enable deprecation/deprecation */
 
 /**
  * This is only exported for internal use.
