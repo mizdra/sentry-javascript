@@ -23,6 +23,11 @@ function clearSpan(otelSpanId: string): void {
   SENTRY_SPAN_PROCESSOR_MAP.delete(otelSpanId);
 }
 
+/** Get a Sentry span for an otel span ID. */
+export function getSentrySpan(otelSpanId: string): SentrySpan | undefined {
+  return SENTRY_SPAN_PROCESSOR_MAP.get(otelSpanId);
+}
+
 /**
  * Converts OpenTelemetry Spans to Sentry Spans and sends them to Sentry via
  * the Sentry SDK.
@@ -92,7 +97,7 @@ export class SentrySpanProcessor implements OtelSpanProcessor {
    */
   public onEnd(otelSpan: OtelSpan): void {
     const otelSpanId = otelSpan.spanContext().spanId;
-    const sentrySpan = SENTRY_SPAN_PROCESSOR_MAP.get(otelSpanId);
+    const sentrySpan = getSentrySpan(otelSpanId);
 
     if (!sentrySpan) {
       __DEBUG_BUILD__ &&
