@@ -26,6 +26,7 @@ export async function prepareReplayEvent({
     event,
     { event_id, integrations },
     scope,
+    client,
   )) as ReplayEvent | null;
 
   // If e.g. a global event processor returned null
